@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 import os
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ def lade_reihen_konfiguration():
         for line in f:
             if ":" in line:
                 reihe, anzahl = line.strip().split(":")
-                reihen[int(reihe)] = int(anzahl)
+                reinen[int(reihe)] = int(anzahl)
     return reihen
 
 @app.route("/", methods=["GET", "POST"])
@@ -21,10 +21,16 @@ def start():
     reihen_config = lade_reihen_konfiguration()
     if request.method == "POST":
         reihe = int(request.form["reihe"])
+        richtung = request.form["richtung"]
         session["reihe"] = reihe
-        session["stock"] = 1
-        session["max_stock"] = reihen_config.get(reihe, 30)
+        session["richtung"] = richtung
+
+        max_stock = reihen_config.get(reihe, 30)
+        session["max_stock"] = max_stock
+        session["stock"] = 1 if richtung == "vor" else max_stock
+
         return redirect(url_for("bewerten"))
+
     return render_template("start.html", reihen=sorted(reihen_config.keys()))
 
 @app.route("/bewerten", methods=["GET", "POST"])
@@ -34,47 +40,49 @@ def bewerten():
 
     reihe = session["reihe"]
     stock = session["stock"]
+    richtung = session["richtung"]
     max_stock = session["max_stock"]
 
     if request.method == "POST":
         bewertung = request.form["bewertung"]
-        reihe = session["reihe"]
-        stock = session["stock"]
-
         with open(DATA_FILE, "a") as f:
             f.write(f"Reihe {reihe}, Stock {stock}, Bewertung {bewertung}\n")
 
-        if stock < session["max_stock"]:
-            session["stock"] += 1
+        if richtung == "vor":
+            if stock < max_stock:
+                session["stock"] += 1
+            else:
+                session["reihe_fertig"] = reihe
+                return redirect(url_for("fertig"))
         else:
-            session["reihe_fertig"] = reihe  # speichern für nächste Seite
-            return redirect(url_for("fertig"))
+            if stock > 1:
+                session["stock"] -= 1
+            else:
+                session["reihe_fertig"] = reihe
+                return redirect(url_for("fertig"))
 
-        return redirect(url_for("bewerten"))  # <-- WICHTIG: Redirect statt direkt rendern
-
+        return redirect(url_for("bewerten"))
 
     return render_template("bewerten.html", reihe=reihe, stock=stock)
-
-@app.route("/reset")
-def reset():
-    session.clear()
-    return redirect(url_for("start"))
 
 @app.route("/fertig")
 def fertig():
     reihe = session.get("reihe_fertig", "?")
     return render_template("fertig.html", reihe=reihe)
 
-from flask import send_file
+@app.route("/reset")
+def reset():
+    session.clear()
+    return redirect(url_for("start"))
 
 @app.route("/download")
 def download():
-    return send_file("daten.txt", as_attachment=True)
+    return send_file(DATA_FILE, as_attachment=True)
 
 @app.route("/reset-daten")
 def reset_daten():
-    with open("daten.txt", "w") as f:
-        f.write("")  # Datei leeren
+    with open(DATA_FILE, "w") as f:
+        f.write("")
     return "daten.txt wurde geleert."
 
 
