@@ -65,6 +65,12 @@ def fertig():
     reihe = session.get("reihe_fertig", "?")
     return render_template("fertig.html", reihe=reihe)
 
+from flask import send_file
+
+@app.route("/download")
+def download():
+    return send_file("daten.txt", as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
