@@ -1,33 +1,28 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Bewertung</title>
-
-
-<script>
-  function playSound(nr) {
-    const sound = document.getElementById("sound-" + nr);
-    if (sound) sound.play();
-  }
-</script>
+  
+  <script>
+    function playSound(nr) {
+      const sound = document.getElementById("sound-" + nr);
+      if (sound) sound.play();
+    }
+  </script>
 </head>
 <body>
-  <h2 style="font-size: 48px; font-weight: bold; text-align: center;">
-    Reihe {{ reihe }} – Stock {{ stock }}
-  </h2>
-  <form method="post" style="display: flex; flex-direction: column; gap: 200px; align-items: center;">
+  <h2 style="font-size: 48px; text-align: center;">Reihe {{ reihe }} – Stock {{ stock }}</h2>
+  <form method="post" style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
     <button name="bewertung" value="1" 
-      style="font-size: 52px; padding: 60px 60px; background-color: green; color: white; border: none; border-radius: 10px;">
-      1 (guter Wuchs)
-    </button>
-    <button name="bewertung" value="2"  
-      style="font-size: 52px; padding: 60px 60px; background-color: orange; color: white; border: none; border-radius: 10px;">
-      2 (mittel)
-    </button>
+      style="font-size: 32px; padding: 30px 60px; background-color: green; color: white; border: none; border-radius: 10px;">
+      1 (gut)</button>
+    <button name="bewertung" value="2" 
+      style="font-size: 32px; padding: 30px 60px; background-color: orange; color: white; border: none; border-radius: 10px;">
+      2 (mittel)</button>
     <button name="bewertung" value="3" 
-      style="font-size: 52px; padding: 60px 60px; background-color: red; color: white; border: none; border-radius: 10px;">
-      3 (schlechter Wuchs)
-    </button>
+      style="font-size: 32px; padding: 30px 60px; background-color: red; color: white; border: none; border-radius: 10px;">
+      3 (schlecht)</button>
   </form>
 </body>
 </html>
