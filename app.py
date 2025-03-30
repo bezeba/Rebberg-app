@@ -13,7 +13,7 @@ def lade_reihen_konfiguration():
         for line in f:
             if ":" in line:
                 reihe, anzahl = line.strip().split(":")
-                reinen[int(reihe)] = int(anzahl)
+                reihen[int(reihe)] = int(anzahl)
     return reihen
 
 @app.route("/", methods=["GET", "POST"])
