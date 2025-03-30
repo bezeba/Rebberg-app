@@ -4,5 +4,4 @@ services:
     env: python
     buildCommand: ""
     startCommand: python app.py
-    region: frankfurt
 
