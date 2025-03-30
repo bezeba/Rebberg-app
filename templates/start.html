@@ -4,26 +4,26 @@
 <body>
   <h2 style="font-size: 50px;">Weingut Bertram</h2>
   <h2 style="font-size: 70px;">Datenermittlung Wuchsstärke</h2>
-  <h2 style="font-size: 36px;">Reihe wählen</h2>
+  <h2 style="font-size: 50px;">Reihe wählen</h2>
   <form method="post">
     <p>
-      <label for="reihe" style="font-size: 20px;">Reihe:</label>
-      <select name="reihe" style="font-size: 24px; padding: 10px;">
+      <label for="reihe" style="font-size: 50px;">Reihe:</label>
+      <select name="reihe" style="font-size: 40px; padding: 40px;">
         {% for r in reihen %}
           <option value="{{ r }}">Reihe {{ r }}</option>
         {% endfor %}
       </select>
     </p>
     <p>
-      <label for="richtung" style="font-size: 20px;">Laufrichtung:</label>
-      <select name="richtung" style="font-size: 24px;">
+      <label for="richtung" style="font-size: 40px;">Laufrichtung:</label>
+      <select name="richtung" style="font-size: 40px;">
         <option value="vor">Vorwärts (1 → n)</option>
         <option value="zurueck">Rückwärts (n → 1)</option>
       </select>
     </p>
-    <button type="submit" style="font-size: 24px; padding: 10px 20px;">Start</button>
+    <button type="submit" style="font-size: 40px; padding: 40px 40px;">Start</button>
   </form>
-  <p><a href="/download" style="font-size: 20px;">📥 daten.txt herunterladen</a></p>
-  <p><a href="/reset-daten" style="font-size: 20px; color: red;">🧹 daten.txt leeren</a></p>
+  <p><a href="/download" style="font-size: 30px;">📥 daten.txt herunterladen</a></p>
+  <p><a href="/reset-daten" style="font-size: 30px; color: red;">🧹 daten.txt leeren</a></p>
 </body>
 </html>
