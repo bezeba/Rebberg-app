@@ -71,6 +71,12 @@ from flask import send_file
 def download():
     return send_file("daten.txt", as_attachment=True)
 
+@app.route("/reset-daten")
+def reset_daten():
+    with open("daten.txt", "w") as f:
+        f.write("")  # Datei leeren
+    return "daten.txt wurde geleert."
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
