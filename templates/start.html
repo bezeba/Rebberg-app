@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Reihe wählen</title></head>
+<body>
+  <h2 style="font-size: 50px;">Weingut Bertram</h2>
+  <h2 style="font-size: 70px;">Datenermittlung Wuchsstärke</h2>
+  <h2 style="font-size: 40px;">Reihe wählen</h2>
+  <form method="post">
+    <select name="reihe" style="font-size: 50px; padding: 30px;">
+      {% for r in reihen %}
+        <option value="{{ r }}">Reihe {{ r }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" style="font-size: 40px; padding: 40px 60px;">Start</button>
+  </form>
+</body>
+</html>
