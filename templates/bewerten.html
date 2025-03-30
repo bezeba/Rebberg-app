@@ -2,15 +2,7 @@
 <html>
 <head>
   <title>Bewertung</title>
-<audio id="sound-1">
- <source src="{{ url_for('static', filename='plop.mp3') }}" type="audio/mpeg">
-</audio>
-<audio id="sound-2">
- <source src="{{ url_for('static', filename='plop.mp3') }}" type="audio/mpeg">
-</audio>
-<audio id="sound-3">
- <source src="{{ url_for('static', filename='plop.mp3') }}" type="audio/mpeg">
-</audio>
+
 
 <script>
   function playSound(nr) {
@@ -24,15 +16,15 @@
     Reihe {{ reihe }} – Stock {{ stock }}
   </h2>
   <form method="post" style="display: flex; flex-direction: column; gap: 200px; align-items: center;">
-    <button name="bewertung" value="1" onclick="playSound(1)" 
+    <button name="bewertung" value="1" 
       style="font-size: 52px; padding: 60px 60px; background-color: green; color: white; border: none; border-radius: 10px;">
       1 (guter Wuchs)
     </button>
-    <button name="bewertung" value="2" onclick="playSound(2)" 
+    <button name="bewertung" value="2"  
       style="font-size: 52px; padding: 60px 60px; background-color: orange; color: white; border: none; border-radius: 10px;">
       2 (mittel)
     </button>
-    <button name="bewertung" value="3" onclick="playSound(3)" 
+    <button name="bewertung" value="3" 
       style="font-size: 52px; padding: 60px 60px; background-color: red; color: white; border: none; border-radius: 10px;">
       3 (schlechter Wuchs)
     </button>
