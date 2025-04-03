@@ -20,13 +20,13 @@
 <body>
   <h2 style="font-size: 68px; text-align: center;">Reihe {{ reihe }} – Stock {{ stock }}</h2>
   <form method="post" style="display: flex; flex-direction: column; gap: 200px; align-items: center;">
-    <button name="bewertung" value="1" 
+    <button name="bewertung" value="1" onclick="vibrieren(100)" 
       style="font-size: 62px; padding: 60px 120px; background-color: green; color: white; border: none; border-radius: 10px;">
       1 (gut)</button>
-    <button name="bewertung" value="2" 
+    <button name="bewertung" value="2" onclick="vibrieren(200)" 
       style="font-size: 62px; padding: 60px 120px; background-color: orange; color: white; border: none; border-radius: 10px;">
       2 (mittel)</button>
-    <button name="bewertung" value="3" 
+    <button name="bewertung" value="3" onclick="vibrieren(300)" 
       style="font-size: 62px; padding: 60px 120px; background-color: red; color: white; border: none; border-radius: 10px;">
       3 (schlecht)</button>
   </form>
