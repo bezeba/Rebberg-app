@@ -3,7 +3,13 @@
 <html>
 <head>
   <title>Bewertung</title>
-  
+  <script>
+    function vibrieren(ms) {
+      if ("vibrate" in navigator) {
+        navigator.vibrate(ms);
+      }
+    }
+  </script>  
   <script>
     function playSound(nr) {
       const sound = document.getElementById("sound-" + nr);
