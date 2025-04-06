@@ -10,7 +10,7 @@
       <label for="reihe" style="font-size: 50px;">Reihe:</label>
       <select name="reihe" style="font-size: 40px; padding: 40px;">
         {% for r in reihen %}
-          <option value="{{ r }}">Reihe {{ r }}</option>
+          <option value="{{ r }}" {% if r == vorschlag %}selected{% endif %}>Reihe {{ r }}</option>
         {% endfor %}
       </select>
     </p>
