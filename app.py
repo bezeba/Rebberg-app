@@ -7,6 +7,32 @@ app.secret_key = 'geheimcode'
 DATA_FILE = "daten.txt"
 CONFIG_FILE = "stockanzahl.txt"
 
+def letzte_reihe_aus_daten():
+    if not os.path.exists(DATA_FILE):
+        return 1
+
+    reihen_config = lade_reihen_konfiguration()
+    max_vorhanden = max(reihen_config.keys())
+    letzte = 0
+
+    with open(DATA_FILE, "r") as f:
+        for line in f:
+            if "Reihe" in line:
+                try:
+                    teil = line.split(",")[0]
+                    reihe = int(teil.strip().split(" ")[1])
+                    letzte = max(letzte, reihe)
+                except:
+                    pass
+
+    # Vorschlag ist nächste Reihe, aber nicht über Maximum hinaus
+    if letzte >= max_vorhanden:
+        return max_vorhanden
+    else:
+        return letzte + 1
+
+
+
 def lade_reihen_konfiguration():
     reihen = {}
     with open(CONFIG_FILE, "r") as f:
@@ -30,8 +56,9 @@ def start():
         session["stock"] = 1 if richtung == "vor" else max_stock
 
         return redirect(url_for("bewerten"))
+    vorgeschlagene_reihe = letzte_reihe_aus_daten()
+    return render_template("start.html", reihen=sorted(reihen_config.keys()), vorschlag=vorgeschlagene_reihe)
 
-    return render_template("start.html", reihen=sorted(reihen_config.keys()))
 
 @app.route("/bewerten", methods=["GET", "POST"])
 def bewerten():
